@@ -34,6 +34,15 @@ $(NAME): $(OBJ_DIR) $(OBJ)
 	@$(CC) $(CFLAGS) -o $(NAME) $(INC) $(OBJ) $(LIB)
 	@echo "Successful !"
 
+linux: $(OBJ_DIR) $(OBJ)
+	@echo "Building libft..."
+	@echo "Done !"
+	@echo ""
+	@echo "Linkin'"
+	@$(CC) $(CFLAGS) -o $(NAME) -I./ -I./libft/include -I./include $(OBJ) -L/usr/X11/lib -lmlx -lXext -lX11
+	@echo "Successful !"
+
+
 $(OBJ_DIR)/%.o: %.c
 	@echo "Compiling $<."
 	@$(CC) -c $< $(INC) -o $@ $(CFLAGS)
