@@ -6,7 +6,7 @@
 /*   By: tvallee <tvallee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/02 18:46:01 by tvallee           #+#    #+#             */
-/*   Updated: 2015/06/04 16:39:11 by tvallee          ###   ########.fr       */
+/*   Updated: 2015/06/08 11:05:28 by tvallee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,6 @@ int			main(int ac, char **av)
 	e.wdw_ptr = mlx_new_window(e.mlx_ptr, SIZE_L, SIZE_H, "Wolf3d");
 	set_callbacks(&e);
 	ft_logger(7, 2, L_INFO, "Starting main loop");
-	mlx_loop();
+	mlx_loop(e.wdw_ptr);
 	return (0);
 }

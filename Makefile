@@ -6,11 +6,11 @@
 #    By: tvallee <tvallee@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/10 14:41:44 by tvallee           #+#    #+#              #
-#    Updated: 2015/06/04 14:01:57 by tvallee          ###   ########.fr        #
+#    Updated: 2015/06/08 18:19:59 by tvallee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC		= main.c set_env.c load_levels.c
+SRC		= main.c set_env.c load_levels.c calc.c draw.c hooks.c exit.c
 NAME	= wolf3d
 CC		= gcc
 CFLAGS	= -Wall -Wextra -g -Wshadow -Wno-missing-noreturn\
