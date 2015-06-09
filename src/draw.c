@@ -6,28 +6,28 @@
 /*   By: tvallee <tvallee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/04 16:44:22 by tvallee           #+#    #+#             */
-/*   Updated: 2015/06/08 18:21:12 by tvallee          ###   ########.fr       */
+/*   Updated: 2015/06/09 21:54:14 by tvallee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
-
-void	draw_line(t_env *e, t_pnt start, t_pnt end, int color)
+static void	draw_line(t_env *e, t_ray ray)
 {
 	
 }
 
-void	draw(t_env *e)
+void		draw(t_env *e)
 {
-	size_t	x;
-	t_ray	ray;
+	size_t			x;
+	t_ray			ray;
 
-	mlx_clear_window(e->mlx_ptr, e->wdw_ptr);
-	e->img_ptr = mlx_new_image(e->mlx_ptr, SIZE_L, SIZE_H);
 	x = 0;
+	SDL_RenderClear(e->sdl_buf);
 	while (x < SIZE_L)
 	{
 		raycast(x, &ray, e);
+		draw_line(e, ray);
 		x++;
 	}
+	SDL_RenderPresent(e->sdl_buf);
 }

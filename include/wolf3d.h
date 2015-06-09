@@ -6,7 +6,7 @@
 /*   By: tvallee <tvallee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/02 12:07:42 by tvallee           #+#    #+#             */
-/*   Updated: 2015/06/08 18:26:42 by tvallee          ###   ########.fr       */
+/*   Updated: 2015/06/09 21:56:21 by tvallee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,20 @@
 # define WOLF3D_H
 
 # include <dirent.h>
-# include <mlx.h>
 # include <math.h>
 # include <fcntl.h>
 # include <sys/types.h>
 # include "libft.h"
+# include "SDL.h"
 
+# define GREY 0x80, 0x80, 0x80
 # define L_LVL e->max_loglvl
 # define W_LVL (seek_lvl(e))
 # define SIZE_H 600
 # define SIZE_L 600
+# define KEY ev.key.keysym.sym
+# define MV_SPEED 1
+# define ROT_SPEED 1
 
 typedef struct dirent	t_fil;
 
@@ -33,11 +37,19 @@ typedef struct	s_pnt
 	double	y;
 }				t_pnt;
 
+enum
+{
+	DOWN = 0,
+	UP,
+	LEFT,
+	RIGHT
+};
+
 typedef struct	s_env
 {
-	void		*mlx_ptr;
-	void		*wdw_ptr;
-	void		*img_ptr;
+	char		kb[4];
+	void		*sdl_wdw;
+	void		*sdl_buf;
 	t_list		*levels;
 	t_pnt		pos;
 	t_pnt		dir;

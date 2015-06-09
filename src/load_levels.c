@@ -6,7 +6,7 @@
 /*   By: tvallee <tvallee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/04 11:57:47 by tvallee           #+#    #+#             */
-/*   Updated: 2015/06/04 16:28:48 by tvallee          ###   ########.fr       */
+/*   Updated: 2015/06/09 11:39:11 by tvallee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static int		**to_i_tab(int fd, t_env *e)
 		tab[i++] = parse_line(&list);
 	tab[i] = NULL;
 	close(fd);
+	ft_logger(L_LVL, 2, L_DEBUG, "Parsed one level");
 	return (tab);
 }
 
@@ -106,4 +107,5 @@ t_list		*load_levels(char *av, t_env *e)
 		closedir(dir);
 	else
 		ft_logger(L_LVL, 2, L_EMERGENCY, "No levels loaded. Aborting");
+	return (list);
 }

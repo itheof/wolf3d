@@ -6,7 +6,7 @@
 /*   By: tvallee <tvallee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/08 16:28:03 by tvallee           #+#    #+#             */
-/*   Updated: 2015/06/08 18:22:21 by tvallee          ###   ########.fr       */
+/*   Updated: 2015/06/09 13:44:36 by tvallee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ static int		get_ray_color(t_ray *ray, t_env *e)
 {
 	int color;
 
-	
-
-	if (ray->side)
+	color = 0xFFFFFF;
+	if (ray->side && e)
 		color = color / 2;
+	return (color);
 }
 
 void			raycast(size_t x, t_ray *ray, t_env *e)
