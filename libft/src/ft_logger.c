@@ -6,24 +6,11 @@
 /*   By: tvallee <tvallee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/02 12:12:10 by tvallee           #+#    #+#             */
-/*   Updated: 2015/06/02 16:47:12 by tvallee          ###   ########.fr       */
+/*   Updated: 2015/06/10 00:06:05 by tvallee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static void	init_color(char **color)
-{
-	color[L_EMERGENCY] = C_EMERGENCY;
-	color[L_ALERT] = C_ALERT;
-	color[L_CRITICAL] = C_CRITICAL;
-	color[L_ERROR] = C_ERROR;
-	color[L_WARNING] = C_WARNING;
-	color[L_NOTICE] = C_NOTICE;
-	color[L_INFO] = C_INFO;
-	color[L_DEBUG] = C_DEBUG;
-	color[L_REGULAR] = C_REGULAR;
-}
 
 static void	print_time(int fd)
 {
@@ -71,11 +58,19 @@ static void	ft_print_type(int loglvl, int fd)
 
 void		ft_logger(int maxlvl, int fd, int loglvl, char *msg)
 {
-	char	*color[8];
+	char	*color[9];
 
+	color[L_EMERGENCY] = C_EMERGENCY;
+	color[L_ALERT] = C_ALERT;
+	color[L_CRITICAL] = C_CRITICAL;
+	color[L_ERROR] = C_ERROR;
+	color[L_WARNING] = C_WARNING;
+	color[L_NOTICE] = C_NOTICE;
+	color[L_INFO] = C_INFO;
+	color[L_DEBUG] = C_DEBUG;
+	color[L_REGULAR] = C_REGULAR;
 	if (maxlvl < loglvl)
 		return ;
-	init_color(color);
 	print_time(fd);
 	ft_putstr_fd(color[loglvl], fd);
 	ft_print_type(loglvl, fd);

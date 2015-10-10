@@ -6,18 +6,19 @@
 /*   By: tvallee <tvallee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/08 16:28:03 by tvallee           #+#    #+#             */
-/*   Updated: 2015/06/09 13:44:36 by tvallee          ###   ########.fr       */
+/*   Updated: 2015/06/12 17:42:34 by tvallee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-static void		init_ray(t_pnt *delta_dist, t_pnt *side_dist, t_ray *ray, t_env *e)
+static void		init_ray(t_pnt *delta_dist, t_pnt *side_dist, t_ray *ray,
+		t_env *e)
 {
 	ray->ray_pos.x = e->pos.x;
 	ray->ray_pos.y = e->pos.y;
-	ray->ray_dir.x = e->dir.x + e->plane.x * (2 * ray->x / SIZE_L - 1);
-	ray->ray_dir.y = e->dir.y + e->plane.y * (2 * ray->x / SIZE_L - 1);
+	ray->ray_dir.x = e->dir.x + e->plane.x * (2 * ray->x / (double)SIZE_L - 1);
+	ray->ray_dir.y = e->dir.y + e->plane.y * (2 * ray->x / (double)SIZE_L - 1);
 	ray->map.x = (int)ray->ray_pos.x;
 	ray->map.y = (int)ray->ray_pos.y;
 	delta_dist->x = sqrt(1 + pow(ray->ray_dir.y, 2) / pow(ray->ray_dir.x, 2));
@@ -44,27 +45,41 @@ static double	proceed_dda(t_ray *ray, t_pnt *side_dist, t_pnt *delta_dist,
 		}
 		else
 		{
-			side_dist->y = delta_dist->y;
-			ray->map.x += ray->step.y;
+			side_dist->y += delta_dist->y;
+			ray->map.y += ray->step.y;
 			ray->side = 1;
 		}
-		ray->hit = (W_LVL[(int)(ray->map.x)][(int)(ray->map.y)] < 9) ? 1 : 0;
+		ray->hit = (W_LVL[(int)(ray->map.x)][(int)(ray->map.y)] != 9) ? 1 : 0;
 	}
 	if (ray->side)
 		return (fabs((ray->map.y - ray->ray_pos.y + (1 - ray->step.y) / 2)
-					/ ray->ray_dir.y));
+		/ ray->ray_dir.y));
 	else
 		return (fabs((ray->map.x - ray->ray_pos.x + (1 - ray->step.x) / 2)
-					/ ray->ray_dir.x));
+		/ ray->ray_dir.x));
 }
 
-static int		get_ray_color(t_ray *ray, t_env *e)
+static int		get_ray_color(t_ray *ray, t_env *e, double perp_walldist)
 {
-	int color;
+	int		color;
 
-	color = 0xFFFFFF;
-	if (ray->side && e)
-		color = color / 2;
+	if (perp_walldist <= MIN_DIST_FOG)
+		ray->fog = MIN_VALUE_FOG;
+	else if (perp_walldist >= MAX_DIST_FOG)
+		ray->fog = MAX_VALUE_FOG;
+	else
+		ray->fog = (perp_walldist - MIN_DIST_FOG) / (MAX_DIST_FOG -
+				MIN_DIST_FOG) * (MAX_VALUE_FOG - MIN_VALUE_FOG) + MIN_VALUE_FOG;
+	if (ray->side && ray->ray_dir.y > 0)
+		color = 0xFF0000;
+	else if (ray->side && ray->ray_dir.y < 0)
+		color = 0x0000FF;
+	else if (ray->ray_dir.x > 0)
+		color = 0xFFFF00;
+	else
+		color = 0x00FF00;
+	if (W_LVL[ray->map.x][ray->map.y] == 6)
+		color = 0xFF00FF;
 	return (color);
 }
 
@@ -84,5 +99,5 @@ void			raycast(size_t x, t_ray *ray, t_env *e)
 	ray->draw_end = ray->line_height / 2 + SIZE_H / 2;
 	if (ray->draw_end >= SIZE_H)
 		ray->draw_end = SIZE_H - 1;
-	ray->color = get_ray_color(ray, e);
+	ray->color = get_ray_color(ray, e, perp_walldist);
 }

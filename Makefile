@@ -6,17 +6,16 @@
 #    By: tvallee <tvallee@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/10 14:41:44 by tvallee           #+#    #+#              #
-#    Updated: 2015/06/09 22:15:13 by tvallee          ###   ########.fr        #
+#    Updated: 2015/06/13 14:23:28 by tvallee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC		= main.c set_env.c load_levels.c calc.c draw.c move.c exit.c tools.c
+SRCS		= calc.c draw.c exit.c load_levels.c main.c move.c set_env.c tools.c
 NAME	= wolf3d
 CC		= gcc
-CFLAGS	= -Wall -Wextra
+CFLAGS	= -Wall -Wextra -Werror
 LDFLAGS	= -Llibft -lft `./SDL2/bin/sdl2-config --libs` -lm
 SRC_DIR	= ./src
-SRCS	= main.c init.c loop.c poll.c raycast.c get_map.c draw.c
 SDL		= SDL2-2.0.3
 INC_DIR = include
 INFLAGS	= -I$(INC_DIR) -Ilibft/$(INC_DIR) `./SDL2/bin/sdl2-config --cflags`

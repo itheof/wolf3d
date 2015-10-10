@@ -6,7 +6,7 @@
 /*   By: tvallee <tvallee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/03 11:00:31 by tvallee           #+#    #+#             */
-/*   Updated: 2015/06/02 16:49:18 by tvallee          ###   ########.fr       */
+/*   Updated: 2015/06/10 00:03:22 by tvallee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct		s_delim
 
 enum
 {
-	L_EMERGENCY,
+	L_EMERGENCY = 0,
 	L_ALERT,
 	L_CRITICAL,
 	L_ERROR,

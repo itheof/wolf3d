@@ -6,7 +6,7 @@
 /*   By: tvallee <tvallee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/02 18:46:01 by tvallee           #+#    #+#             */
-/*   Updated: 2015/06/09 21:55:20 by tvallee          ###   ########.fr       */
+/*   Updated: 2015/06/12 15:51:05 by tvallee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static void	init_sdl(t_env *e)
 {
 	char	lbuf[2048];
 
-	*lbuf = 0;
 	ft_logger(L_LVL, 2, L_INFO, "Initializing SDL....");
 	e->sdl_wdw = NULL;
 	e->sdl_buf = NULL;
@@ -29,7 +28,7 @@ static void	init_sdl(t_env *e)
 	}
 	else
 	{
-		if (!(e->sdl_wdw = SDL_CreateWindow( "Wolf3d", SDL_WINDOWPOS_UNDEFINED,
+		if (!(e->sdl_wdw = SDL_CreateWindow("Wolf3d", SDL_WINDOWPOS_UNDEFINED,
 				SDL_WINDOWPOS_UNDEFINED, SIZE_L, SIZE_H, SDL_WINDOW_SHOWN)))
 		{
 			ft_strcpy(lbuf, "Can't create window:");
@@ -79,6 +78,7 @@ int			main(int ac, char **av)
 	init_sdl(&e);
 	e.sdl_buf = SDL_CreateRenderer(e.sdl_wdw, -1, SDL_RENDERER_ACCELERATED);
 	ft_logger(7, 2, L_INFO, "Starting main loop");
+	ft_spawn(&e, 0);
 	while (42)
 	{
 		while (SDL_PollEvent(&ev) != 0)
@@ -88,9 +88,8 @@ int			main(int ac, char **av)
 				ft_exit(&e);
 			if (ev.type == SDL_KEYDOWN || ev.type == SDL_KEYUP)
 				ft_rulekeys(&e, ev);
-			ft_move(&e);
-			draw(&e);
 		}
+		ft_move(&e);
 		draw(&e);
 	}
 	return (0);

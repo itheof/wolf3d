@@ -6,7 +6,7 @@
 /*   By: tvallee <tvallee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/04 11:57:47 by tvallee           #+#    #+#             */
-/*   Updated: 2015/06/09 11:39:11 by tvallee          ###   ########.fr       */
+/*   Updated: 2015/06/12 18:06:20 by tvallee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,7 @@ static t_list	*ft_parse_level(t_fil *file, char *path, t_env *e)
 	t_list	*ret;
 	int		fd;
 
-	ret = NULL;
-	if (file->d_name[0] != '.')
+	if (!(ret = NULL) && file->d_name[0] != '.')
 	{
 		ft_strcpy(f_path, path);
 		ft_strcat(f_path, "/");
@@ -87,7 +86,7 @@ static t_list	*ft_parse_level(t_fil *file, char *path, t_env *e)
 	return (ret);
 }
 
-t_list		*load_levels(char *av, t_env *e)
+t_list			*load_levels(char *av, t_env *e)
 {
 	t_list	*list;
 	DIR		*dir;

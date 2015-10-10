@@ -6,7 +6,7 @@
 /*   By: tvallee <tvallee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/08 13:50:14 by tvallee           #+#    #+#             */
-/*   Updated: 2015/06/08 15:12:18 by tvallee          ###   ########.fr       */
+/*   Updated: 2015/06/12 19:25:17 by tvallee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,21 @@ int		**seek_lvl(t_env *e)
 	current = e->levels;
 	while (i--)
 		current = current->next;
-	return (current->content);
+	if (current && current->content)
+		return (current->content);
+	else
+		return (NULL);
+}
+
+int		can_move(int n, t_env *e)
+{
+	if (n == 9)
+		return (1);
+	else if (n == 6)
+	{
+		ft_spawn(e, e->current_lvl + 1);
+		return (0);
+	}
+	else
+		return (0);
 }

@@ -6,7 +6,7 @@
 #    By: tvallee <tvallee@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/10 14:41:44 by tvallee           #+#    #+#              #
-#    Updated: 2015/06/02 13:57:05 by tvallee          ###   ########.fr        #
+#    Updated: 2015/06/13 13:56:53 by tvallee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRC		= ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isspace.c\
 		ft_tablinedel.c ft_strsplit_whitespaces.c ft_logger.c
 NAME	= libft.a
 CC		= gcc
-CFLAGS	= -Wall -Wextra -ansi -pedantic -Wshadow -Wno-missing-noreturn\
+CFLAGS	= -Wall -Wextra -Werror -ansi -pedantic -Wshadow -Wno-missing-noreturn\
 		  -Wno-padded -Wno-unreachable-code -Wredundant-decls -g\
 		  -Wmissing-declarations
 SRC_DIR	= src
